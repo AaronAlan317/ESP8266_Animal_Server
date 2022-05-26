@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>ESP Station</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <script src="./script.js"></script>
+
+</head>
+<body>
+    <h1>ESP8266 </h1>
+    <button onclick="openAlert()">Click me</button>
+    <div class ="content">
+        <div class='card-grid'>
+            <div class="card">
+                <p>
+                     <strong>GPIO2</strong>
+                </p>
+                <div id ="state" class="%STATE%"></div>
+                <p>GPIO state: <strong> %STATE%</strong></p>
+                <p>
+                    <a href="/on1"><button class="button">COMPLETED</button></a>
+                    <a href="/off1" id="reset"><button class="button button2">NOT COMPLETED</button></a>
+                </p>
+            </div>
+            <div class="card">
+                <p>
+                     <strong>Sensor Readings</strong>
+                </p>
+                <p>
+                    <span class="dht-labels">Temperature</span> 
+                    <span id="temperature">%TEMPERATURE%</span>
+                    <sup class="units">&deg;C</sup>
+                    <a href="/temperature "><button class="button button2">Get Temp</button></a>
+                </p>
+            </div>
+            <div class="card">
+                <p>
+                     <strong>Sensor Readings</strong>
+                </p>
+                <p>
+                    <span class="dht-labels">Humidity</span> 
+                    <span id="humidity">%HUMIDITY%</span>
+                    <sup class="units">%</sup>
+                </p>
+            </div>
+        </div>
+
+    </div>
+</body>
+<script>
+    setInterval(function () {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function(){
+            if(this.readyState == 4 && this.status == 200){
+                document.getElementById("temperature").innerHTML = this.responseText;
+            }
+        };
+        xhttp.open("GET", "/temperature", true);
+        xhttp.send()
+    }, 10000)
+
+    setInterval(function ( ) {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          document.getElementById("humidity").innerHTML = this.responseText;
+        }
+      };
+      xhttp.open("GET", "/humidity", true);
+      xhttp.send();
+    }, 10000 ) ;
+    </script>
+</html>

@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"name": "220325-180122-esp8266-rtos-sdk-blink",
+			"path": "..\\..\\220325-180122-esp8266-rtos-sdk-blink"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"cmath": "cpp"
+		}
+	}
+}
